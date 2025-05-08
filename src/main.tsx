@@ -11,19 +11,19 @@ import {
 import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http } from "viem";
-import { sepolia } from "wagmi/chains";
+import { mainnet } from "wagmi/chains";
 
 import "@rainbow-me/rainbowkit/styles.css";
 
-// RainbowKit + Wagmi config
 const config = getDefaultConfig({
   appName: "Incotest App",
-  projectId: "8c9fd422f7cdb312ba610265bce94127", // get from https://cloud.walletconnect.com
-  chains: [sepolia], // or mainnet, polygon, etc.
+  projectId: "8c9fd422f7cdb312ba610265bce94127", // WalletConnect v2 Project ID
+  chains: [mainnet], // 🟢 Now using Ethereum Mainnet
   transports: {
-    [sepolia.id]: http(),
+    [mainnet.id]: http(), // Default HTTP transport (or use your Infura/Alchemy URL)
   },
 });
+
 
 const queryClient = new QueryClient();
 
