@@ -13,7 +13,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http } from "viem";
 import "@rainbow-me/rainbowkit/styles.css";
 
-// ✅ Only SEI Mainnet
+// src/lib/seiChains.ts
 export const seiMainnet = {
   id: 1329,
   name: "Sei Mainnet",
@@ -35,12 +35,35 @@ export const seiMainnet = {
   },
 };
 
+export const seiTestnet = {
+  id: 1328,
+  name: "Sei Testnet",
+  nativeCurrency: {
+    name: "Sei Testnet",
+    symbol: "SEI",
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://evm-rpc-testnet.sei-apis.com"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "SeiScan Testnet",
+      url: "https://sei.explorers.guru/testnet",
+    },
+  },
+};
+
+
 const config = getDefaultConfig({
   appName: "SEI Wallet App",
-  projectId: "8c9fd422f7cdb312ba610265bce94127", // WalletConnect v2 Project ID
-  chains: [seiMainnet],
+  projectId: "8c9fd422f7cdb312ba610265bce94127", // WalletConnect v2 ID
+  chains: [seiMainnet, seiTestnet], // ✅ Use your SEI chains
   transports: {
     [seiMainnet.id]: http("https://evm-rpc.sei-apis.com"),
+    [seiTestnet.id]: http("https://evm-rpc-testnet.sei-apis.com"),
   },
 });
 
@@ -53,7 +76,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <RainbowKitProvider
           theme={darkTheme()}
           modalSize="compact"
-          initialChain={seiMainnet}
+          initialChain={seiMainnet} // Optional: default chain
         >
           <App />
         </RainbowKitProvider>
