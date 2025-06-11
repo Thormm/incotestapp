@@ -4,7 +4,6 @@ import { FiClock, FiDownload, FiUpload } from "react-icons/fi";
 
 export default function Withdrawal() {
   const [amount, setAmount] = useState("");
-  const [walletAddress] = useState("0xABC...1234");
   const [balance] = useState(458.78);
   const [showSuccess, setShowSuccess] = useState(false);
   const [error, setError] = useState("");

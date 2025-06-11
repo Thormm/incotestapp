@@ -1,7 +1,7 @@
-import { useState } from "react";
 import logo from "../../assets/logo1.png";
 import { FiClock, FiDownload, FiUpload } from "react-icons/fi";
 import { FiCopy } from "react-icons/fi";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import {
   BarChart,
   Bar,
@@ -57,12 +57,44 @@ export default function Dash() {
         {/* Logo */}
         <img src={logo} alt="Logo" className="h-25 w-40" />
 
+         {/* Styled ConnectButton */}
+                <ConnectButton.Custom>
+                  {({
+                    account,
+                    chain,
+                    mounted,
+                  }) => {
+                    const connected = mounted && account && chain;
+        
+                    return (
+                      <div className="relative">
+                        <button
+                          className={`text-xs md:text-base px-2 md:px-4 py-1.5 md:py-2 rounded transition cursor-pointer
+                            ${
+                              connected
+                                ? "bg-green-700 hover:bg-green-800"
+                                : "bg-gradient-to-br from-[#620909] to-red-600 hover:from-red-700 hover:to-red-800"
+                            } text-white flex items-center gap-2`}
+                        >
+                          {connected
+                            ? `${account.displayName}${
+                                account.displayBalance
+                                  ? ` (${account.displayBalance})`
+                                  : ""
+                              }`
+                            : "Connect Wallet"}
+                        </button>
+                      </div>
+                    );
+                  }}
+                </ConnectButton.Custom>
+
         {/* Top nav for medium+ screens */}
         <nav className="hidden md:flex gap-12 px-2 items-center text-sm justify-center">
-          <a href="#" className="flex items-center gap-2 hover:text-[#d70f25]">
+          <a href="/history" className="flex items-center gap-2 hover:text-[#d70f25]">
             History
           </a>
-          <a href="#" className="flex items-center gap-2 ho2er:text-[#d70f25]">
+          <a href="/deposit" className="flex items-center gap-2 ho2er:text-[#d70f25]">
             <div className="bg-gradient-to-br from-[#d70f25] to-red-700 p-4 rounded-full shadow-md">
               <FiDownload className="text-lg" />
             </div>
@@ -78,8 +110,8 @@ export default function Dash() {
       </header>
 
       {/* Page Content */}
-      <main className="flex-grow p-4 flex justify-center items-center">
-        <div className="w-full max-w-6xl flex flex-col md:flex-row gap-4">
+      <main className="flex-grow p-4 flex justify-center items-center my-10 mb-25 md:m-0">
+        <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10">
           {/* First div - 1/3 on large, full on small */}
           <div className="bg-black rounded-lg p-4 w-full md:w-1/3 text-white relative overflow-hidden">
             <h6 className="text-sm font-semibold mb-1">Portfolio Balance</h6>
@@ -123,7 +155,7 @@ export default function Dash() {
             </div>
           </div>
           {/* Second div - 2/3 on large, full on small */}
-          <div className="bg-black rounded-lg p-4 w-full md:w-1/3 text-white relative overflow-hidden">
+          <div className="bg-black rounded-lg p-6 w-full md:w-1/3 text-white relative overflow-hidden">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {stats.map((stat, i) => (
                 <div
@@ -285,7 +317,7 @@ export default function Dash() {
         </a>
 
         {/* Deposit - Big round gradient */}
-        <a href="#" className="flex flex-col items-center text-white -mt-6">
+        <a href="/deposit" className="flex flex-col items-center text-white -mt-6">
           <div className="bg-gradient-to-br from-[#d70f25] to-red-700 p-4 rounded-full shadow-md">
             <FiDownload className="text-2xl" />
           </div>

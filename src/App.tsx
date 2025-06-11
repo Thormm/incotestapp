@@ -4,6 +4,7 @@ import Home from "./pages/Home/home";
 import Dash from "./pages/Dash/dash";
 import Deposit from "./pages/Deposit/deposit";
 import History from "./pages/History/history";
+import Withdrawal from "./pages/Withdrawal/withdrawal";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
       { path: "/dash", element: <Dash /> },
       { path: "/deposit", element: <Deposit /> },
       { path: "/history", element: <History /> },
+      { path: "/withdrawal", element: <Withdrawal /> },
     ],
   },
 ]);

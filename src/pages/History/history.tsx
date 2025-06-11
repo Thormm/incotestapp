@@ -2,7 +2,18 @@ import { useState } from "react";
 import { FiClock, FiDownload, FiUpload } from "react-icons/fi";
 import logo from "../../assets/logo1.png";
 
-const mockData = {
+type TransactionType = 'deposits' | 'withdrawals' | 'dailyInterests' | 'referrals';
+
+type TransactionItem = {
+  color: string;
+  title: string;
+  time: string;
+  author: string;
+  address: string;
+  amount: string;
+};
+
+const mockData: Record<TransactionType, TransactionItem[]> = {
   deposits: Array.from({ length: 42 }, (_, i) => ({
     color: "bg-green-500",
     title: "Portfolio Deposit",
@@ -38,7 +49,7 @@ const mockData = {
 };
 
 export default function History() {
-  const [activeTab, setActiveTab] = useState("deposits");
+  const [activeTab, setActiveTab] = useState<TransactionType>('deposits');
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
 
@@ -77,7 +88,7 @@ export default function History() {
 
           {/* Toggle Buttons */}
           <div className="flex justify-center gap-4 mb-4">
-            {["deposits", "withdrawals", "dailyInterests", "referrals"].map(
+            {(["deposits", "withdrawals", "dailyInterests", "referrals"] as TransactionType[]).map(
               (tab) => (
                 <button
                   key={tab}
@@ -101,7 +112,7 @@ export default function History() {
 
           {/* Transactions List */}
           <div className="space-y-3">
-            {pageData.map((item, idx) => (
+            {pageData.map((item: TransactionItem, idx: number) => (
               <div
                 key={idx}
                 className="bg-[#1f1f1f] rounded-full flex items-center justify-between px-4 py-3 shadow"
